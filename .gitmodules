@@ -1,0 +1,3 @@
+[submodule "ext/miniaudio/miniaudio"]
+	path = ext/miniaudio/miniaudio
+	url = git@github.com:mackron/miniaudio.git
