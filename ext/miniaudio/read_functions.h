@@ -32,7 +32,7 @@ static VALUE rb_dr ## FORMAT ## _open_file_and_read_pcm_frames_ ## CODE (VALUE m
     return Qnil;\
   }\
 \
-  VALUE ret_str = rb_str_new((char*)frames, sizeof(FRAME_TYPE)*total_frames);\
+  VALUE ret_str = rb_str_new((char*)frames, sizeof(FRAME_TYPE)*num_channels*total_frames);\
   dr ## FORMAT ## _free(frames, NULL);\
   VALUE ret = rb_ary_new();\
   rb_ary_push(ret, ret_str);\
@@ -91,7 +91,7 @@ static VALUE rb_dr ## FORMAT ## _open_memory_and_read_pcm_frames_ ## CODE (VALUE
     return Qnil;\
   }\
 \
-  VALUE ret_str = rb_str_new((char*)frames, sizeof(FRAME_TYPE)*total_frames);\
+  VALUE ret_str = rb_str_new((char*)frames, sizeof(FRAME_TYPE)*num_channels*total_frames);\
   dr ## FORMAT ## _free(frames, NULL);\
   VALUE ret = rb_ary_new();\
   rb_ary_push(ret, ret_str);\
@@ -122,7 +122,7 @@ static VALUE rb_drmp3_open_memory_and_read_pcm_frames_ ## CODE (VALUE mod, VALUE
     return Qnil;\
   }\
 \
-  VALUE ret_str = rb_str_new((char*)frames, sizeof(FRAME_TYPE)*total_frames);\
+  VALUE ret_str = rb_str_new((char*)frames, sizeof(FRAME_TYPE)*config.channels*total_frames);\
   drmp3_free(frames, NULL);\
   VALUE ret = rb_ary_new();\
   rb_ary_push(ret, ret_str);\
@@ -154,7 +154,7 @@ static VALUE rb_stb_vorbis_decode_filename_s16 (VALUE mod, VALUE filename) {
     return Qnil;
   }
 
-  VALUE ret_str = rb_str_new((char*)output, sizeof(int16_t)*total_frames);
+  VALUE ret_str = rb_str_new((char*)output, sizeof(int16_t)*num_channels*total_frames);
   free(output);
   VALUE ret = rb_ary_new();
   rb_ary_push(ret, ret_str);
@@ -187,7 +187,7 @@ static VALUE rb_stb_vorbis_decode_memory_s16(VALUE mod, VALUE str) {
     return Qnil;
   }
 
-  VALUE ret_str = rb_str_new((char*)output, sizeof(int16_t)*total_frames);
+  VALUE ret_str = rb_str_new((char*)output, sizeof(int16_t)*num_channels*total_frames);
   free(output);
   VALUE ret = rb_ary_new();
   rb_ary_push(ret, ret_str);

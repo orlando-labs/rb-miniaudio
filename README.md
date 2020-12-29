@@ -30,7 +30,7 @@ gem install miniaudio
 ```ruby
 require 'miniaudio'
 
-bin_string, sample_rate, num_channels, total_samples = Miniaudio.mp3_read_file_s16 'path/to/file'
+bin_string, sample_rate, num_channels, samples_per_channel = Miniaudio.mp3_read_file_s16 'path/to/file'
 ```
 
 ## Currently available methods for reading
