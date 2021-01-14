@@ -40,7 +40,7 @@ Miniaudio.methods.select { |m| m.to_s.include? 'read_' }
  => [:wav_read_s32, :wav_read_f32, :mp3_read_s16, :mp3_read_f32, :flac_read_s16, :flac_read_s32, :flac_read_f32, :wav_read_file_s16, :wav_read_file_s32, :wav_read_file_f32, :mp3_read_file_s16, :mp3_read_file_f32, :flac_read_file_s16, :flac_read_file_s32, :flac_read_file_f32, :vorbis_read_file_s16, :wav_read_s16]
 ```
 
-## Currently availbel methods for conversion
+## Currently available methods for audio format conversion
 
 ```ruby
 converted, source_bytes_used = Miniaudio.convert_frames 
