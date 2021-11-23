@@ -49,7 +49,16 @@ converted, source_bytes_used = Miniaudio.convert_frames
   dst_frame_format, dst_channels_num, dst_sample_rate 
 ```
 
-Frame formats:
+Allowed frame formats for src:
+
+```ruby
+Miniaudio::FRAME_FORMATS + Miniaudio::G711_ALGOS
+ => [:u8, :s16, :s24, :s32, :f32, :alaw, :mulaw]
+```
+
+If one of G.711 formats provides then src_sample_rate is forced to be equal 8000.
+
+Allowed frame formats for dst:
 
 ```ruby
 Miniaudio::FRAME_FORMATS
