@@ -24,7 +24,7 @@ module Miniaudio
         _convert_frames(
           source_string,
           target_format, src_channels_num, G711_SAMPLE_RATE,
-          dst_frame_format, dst_channels_num, dst_sample_rate)
+          dst_frame_format, dst_channels_num, dst_sample_rate
         )
       else
         [pcm, source_string.length]
