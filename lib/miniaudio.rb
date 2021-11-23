@@ -44,5 +44,5 @@ module Miniaudio
   end
 end
 
-require_relative '../ext/miniaudio/miniaudio'
+require_relative 'miniaudio/miniaudio'
 
