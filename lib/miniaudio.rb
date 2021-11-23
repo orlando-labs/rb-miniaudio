@@ -30,7 +30,11 @@ module Miniaudio
         [pcm, source_string.length]
       end
     else
-      _convert_frames(*)
+      _convert_frames(
+        source_string,
+        src_frame_format, src_channels_num, src_sample_rate,
+        dst_frame_format, dst_channels_num, dst_sample_rate
+      )
     end
   end
 end
