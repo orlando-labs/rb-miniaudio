@@ -11,9 +11,6 @@ static const char* MA_SAMPLE_FORMAT_S24 = "s24";
 static const char* MA_SAMPLE_FORMAT_S32 = "s32";
 static const char* MA_SAMPLE_FORMAT_F32 = "f32";
 
-static const char* G711_FORMAT_ALAW = "alaw";
-static const char* G711_FORMAT_MULAW = "mulaw";
-
 #define CHECK_CHANNELS_NUM(rb, c, err) \
 int c = NUM2INT(rb); \
 if (c < MA_MIN_CHANNELS || c > MA_MAX_CHANNELS) { \
@@ -76,23 +73,20 @@ static int sample_width(ma_format ma_fmt) {
   return 0;
 }
 
+#define SAMPLE_WIDTH_s16 2
+#define SAMPLE_WIDTH_s32 4
+#define SAMPLE_WIDTH_f32 4
+
 #define FROM_G711_CONVERSION(FROM, TO) \
-static VALUE rb_g711_conversion_ ## FROM ## _to_ ## TO ( \
-  VALUE mod, \
-  VALUE rb_source, \
-  VALUE rb_src_format, VALUE rb_dst_format) { \
- \
-  CHECK_G711_FORMAT(rb_src_format, "source"); \
-  CHECK_SAMPLE_FORMAT(rb_dst_format, dst_sample_format, "target"); \
- \
-  int mem_len = RSTRING_LEN(rb_source) * sample_width(dst_sample_format); \
+static VALUE rb_g711_conversion_ ## FROM ## _to_ ## TO (VALUE mod, VALUE rb_source) { \
+  int mem_len = RSTRING_LEN(rb_source) * SAMPLE_WIDTH_ ## TO; \
   void *converted = malloc(mem_len); \
  \
   if (converted == NULL) { \
     rb_raise(rb_eNoMemError, "Unable to allocate memory for converted frames"); \
   } \
  \
-  drwav_ ## FROM ## _to_ ## TO (converted, (void*)StringValuePtr(rb_source), mem_len); \
+  drwav_ ## FROM ## _to_ ## TO (converted, (void*)StringValuePtr(rb_source), RSTRING_LEN(rb_source)); \
  \
   VALUE rb_output = rb_str_new(converted, mem_len); \
   free(converted); \
@@ -167,11 +161,11 @@ FROM_G711_CONVERSION(mulaw, f32)
 void define_convert_functions_under(VALUE mod) {
   rb_define_module_function(mod, "_convert_frames", &rb_ma_convert_frames, 7);
   
-  rb_define_module_function(mod, "alaw_to_s16", &rb_g711_conversion_alaw_to_s16, 3);
-  rb_define_module_function(mod, "alaw_to_s32", &rb_g711_conversion_alaw_to_s32, 3);
-  rb_define_module_function(mod, "alaw_to_f32", &rb_g711_conversion_alaw_to_f32, 3);
+  rb_define_module_function(mod, "alaw_to_s16", &rb_g711_conversion_alaw_to_s16, 1);
+  rb_define_module_function(mod, "alaw_to_s32", &rb_g711_conversion_alaw_to_s32, 1);
+  rb_define_module_function(mod, "alaw_to_f32", &rb_g711_conversion_alaw_to_f32, 1);
   
-  rb_define_module_function(mod, "mulaw_to_s16", &rb_g711_conversion_mulaw_to_s16, 3);
-  rb_define_module_function(mod, "mulaw_to_s32", &rb_g711_conversion_mulaw_to_s32, 3);
-  rb_define_module_function(mod, "mulaw_to_f32", &rb_g711_conversion_mulaw_to_f32, 3);
+  rb_define_module_function(mod, "mulaw_to_s16", &rb_g711_conversion_mulaw_to_s16, 1);
+  rb_define_module_function(mod, "mulaw_to_s32", &rb_g711_conversion_mulaw_to_s32, 1);
+  rb_define_module_function(mod, "mulaw_to_f32", &rb_g711_conversion_mulaw_to_f32, 1);
 }
