@@ -56,7 +56,7 @@ Miniaudio::FRAME_FORMATS + Miniaudio::G711_ALGOS
  => [:u8, :s16, :s24, :s32, :f32, :alaw, :mulaw]
 ```
 
-If one of G.711 formats provides then src_sample_rate is forced to be equal 8000.
+If one of G.711 formats provided then src_sample_rate is forced to be equal 8000.
 
 Allowed frame formats for dst:
 
