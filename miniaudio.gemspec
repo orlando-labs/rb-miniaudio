@@ -11,8 +11,8 @@ c_srcs = [
 
 Gem::Specification.new do |s|
   s.name = 'miniaudio'
-  s.required_ruby_version = '>= 2.5.0'
-  s.version = '0.3.3'
+  s.required_ruby_version = '>= 2.6.0'
+  s.version = '0.4.0'
   s.date = Date.today.to_s
   s.summary = 'Miniaudio library Ruby wrapper'
   s.description = 'Miniaudio library (https://github.com/mackron/miniaudio) Ruby wrapper'
