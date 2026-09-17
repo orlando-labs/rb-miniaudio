@@ -3,7 +3,7 @@
 require 'mkmf'
 require 'rbconfig'
 
-$CFLAGS = '-Wall -Werror -I./webrtc -Wno-unused-function -Wimplicit-function-declaration -g3'
+$CFLAGS = '-Wall -Werror -I./webrtc -Wno-unused-function -Wno-unused-but-set-variable -Wimplicit-function-declaration -g3'
 $CXXFLAGS = '-std=c++11 -Wall -Werror -I./miniaudio -g3'
 
 $CC = 'gcc'
