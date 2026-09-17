@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/orlando-labs/rb-miniaudio'
   s.license = 'MIT'
   s.extensions = %w[ext/miniaudio/extconf.rb]
+  s.add_development_dependency 'rake-compiler'
 end
