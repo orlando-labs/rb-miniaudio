@@ -1,2 +1,5 @@
 *.o
+*.so
 *.bundle
+/Gemfile.lock
+/tmp/

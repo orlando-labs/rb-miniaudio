@@ -64,3 +64,11 @@ Allowed frame formats for dst:
 Miniaudio::FRAME_FORMATS
  => [:u8, :s16, :s24, :s32, :f32]
 ```
+
+# Development
+
+Install development dependencies in the gemspec, then run this to compile the C extension:
+
+```shell-session
+rake compile
+```
